@@ -1,22 +1,14 @@
-import logo from './logo.svg';
 import './App.css';
+import { List, ListItem, ListItemText } from '@mui/material';
+import tags from './countryTags.json';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <List>
+          {Object.entries(tags).map(([tag, name]) => <ListItem><ListItemText primary={name} secondary={tag} /></ListItem>)}
+        </List>
       </header>
     </div>
   );

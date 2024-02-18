@@ -6,7 +6,7 @@ if (!process.argv[2]) {
         const [tag, ...name] = line.trim().replaceAll(/:0|"/g, '').split(' ');
         return [tag, name.join(' ')];
     }));
-    fs.writeFileSync('./countryTags.json', JSON.stringify(countriesLoc));
+    fs.writeFileSync('./src/countryTags.json', JSON.stringify(countriesLoc));
 
     console.log('Wrote', Object.entries(countriesLoc).length, 'entries to countryTags.json');
 }
