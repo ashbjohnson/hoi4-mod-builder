@@ -11,6 +11,7 @@ const ElseIfBlock = getAbstractScopedModElement('else_if');
 const ElseBlock = getAbstractScopedModElement('else');
 const EventBlock = getAbstractScopedModElement('country_event');
 const ImmediateBlock = getAbstractScopedModElement('immediate');
+const Effect = (effectName) => getAbstractScopedModElement(effectName);
 
 export {
     OptionBlock,
@@ -23,5 +24,6 @@ export {
     ElseBlock,
     ElseIfBlock,
     EventBlock,
-    ImmediateBlock
+    ImmediateBlock,
+    Effect
 }

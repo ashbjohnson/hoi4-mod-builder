@@ -1,13 +1,11 @@
-import { BlankLine, CountryExistsBlock, DescBlock, TriggersEffect, IdBlock, NameBlock, PictureBlock, TitleBlock, getEffectFireBlock } from "../Model/Entity/AtomicModElements";
-import { getAbstractScopedModElement } from "../Model/Entity/Interface/AbstractScopedModElement";
-import { EventBlock, IfBlock, LimitBlock, OptionBlock, getCountryScopedModElement } from "../Model/Entity/ScopedModElements";
+import { BlankLine, CountryExistsBlock, DescBlock, TriggersEffect, IdBlock, NameBlock, PictureBlock, TitleBlock } from "../Model/Entity/AtomicModElements";
+import { Effect, EventBlock, IfBlock, LimitBlock, OptionBlock, getCountryScopedModElement } from "../Model/Entity/ScopedModElements";
 
 describe('test scoped elements', () => {
     it('prints country-level elements', () => {
-        const ElementBlockClass = getCountryScopedModElement('RUS');
-        const ElementBlock = new ElementBlockClass([
-            new IdBlock('test_id'),
-            new NameBlock('test_name'),
+        const ElementBlock = getCountryScopedModElement('RUS')([
+            IdBlock('test_id'),
+            NameBlock('test_name'),
         ]);
 
         expect(ElementBlock.getFileRepresentation()).toEqual(
@@ -19,21 +17,21 @@ describe('test scoped elements', () => {
     });
 
     it('prints compound event', () => {
-        const MockEventBlock = new EventBlock([
-            new IdBlock('event.1'),
-            new TitleBlock('event.1.t'),
-            new DescBlock('event.1.desc'),
-            new PictureBlock('GFX_event_1_image'),
-            new BlankLine(),
-            new OptionBlock([
-                new NameBlock('event.1.a'),
-                new IfBlock([
-                    new LimitBlock([
-                        new CountryExistsBlock('GEO'),
-                        new CountryExistsBlock('AZR'),
+        const MockEventBlock = EventBlock([
+            IdBlock('event.1'),
+            TitleBlock('event.1.t'),
+            DescBlock('event.1.desc'),
+            PictureBlock('GFX_event_1_image'),
+            BlankLine(),
+            OptionBlock([
+                NameBlock('event.1.a'),
+                IfBlock([
+                    LimitBlock([
+                        CountryExistsBlock('GEO'),
+                        CountryExistsBlock('AZR'),
                     ]),
-                    new (getCountryScopedModElement('GEO'))([
-                        new (getEffectFireBlock('econ_join_sphere_RUS'))('yes'),
+                    getCountryScopedModElement('GEO')([
+                        TriggersEffect('econ_join_sphere_RUS'),
                     ]),
                 ]),
             ]),
@@ -62,8 +60,8 @@ describe('test scoped elements', () => {
     });
 
     it('can pull data from other places', () => {
-        const MockEffect = new (getAbstractScopedModElement('mock_effect'))([]);
-        const MockCountryScopedEffect = new (getCountryScopedModElement('RUS'))([
+        const MockEffect = Effect('mock_effect')([]);
+        const MockCountryScopedEffect = getCountryScopedModElement('RUS')([
             TriggersEffect(MockEffect),
         ]);
 

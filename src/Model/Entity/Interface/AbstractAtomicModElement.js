@@ -11,13 +11,13 @@ class AbstractAtomicModElement extends IModElement {
     }
 }
 
-export const getAbstractAtomicModElement = (key) => class GenericAtomicModElement extends AbstractAtomicModElement {
+export const getAbstractAtomicModElement = (key) => (value) => new (class GenericAtomicModElement extends AbstractAtomicModElement {
     [key];
 
     constructor (value) {
         super(key, value);
         this[key] = value;
     }
-}
+})(value);
 
 export default AbstractAtomicModElement;
