@@ -25,7 +25,7 @@ class AbstractScopedModElement extends IModElement {
     }
 }
 
-export const getAbstractScopedModElement = (key) => (children) => new (class GenericScopedModElement extends AbstractScopedModElement {
+export const getAbstractScopedModElement = (key) => (children = []) => new (class GenericScopedModElement extends AbstractScopedModElement {
     constructor (children) {
         super(key, children);
     }
